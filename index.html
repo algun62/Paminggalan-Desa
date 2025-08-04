@@ -146,6 +146,7 @@
                     <a href="#contact" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('contact', this)">Kontak</a>
                     <a href="#map" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('map', this)">Peta</a>
                     <a href="#blooklet" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('blooklet', this)">e-Booklet</a>
+                    <a href="#SOP" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('SOP', this)">SOP</a>
                 </nav>
                 
                 <!-- Mobile Menu Button -->
@@ -167,6 +168,7 @@
                    <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-emerald-500 hover:bg-gray-50" onclick="showPage('contact', this); closeMobileMenu();">Kontak</a>
                    <a href="#map" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-emerald-500 hover:bg-gray-50" onclick="showPage('map', this); closeMobileMenu();">Peta</a>
                    <a href="#blooklet" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-emerald-500 hover:bg-gray-50" onclick="showPage('blooklet', this); closeMobileMenu();">e-Booklet</a>
+                   <a href="#SOP" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-emerald-500 hover:bg-gray-50" onclick="showPage('SOP', this); closeMobileMenu();">SOP</a>
             </div>
         </div>
     </header>
@@ -231,7 +233,7 @@
                 <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300">
                     <img src="gunung.webp" alt="Gunung Garonggong" class="w-full h-56 object-cover cursor-pointer image-gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Gunung';">
                     <div class="p-6">
-                        <h3 class="text-2xl font-bold mb-2 text-gray-900">Gunung Garonggong</h3>
+                        <h3 class="text-2xl font-bold mb-2 text-gray-900">Gunung Pukkotta</h3>
                         <p class="text-gray-700">Saksi bisu sejarah dan kehidupan alam. Mendaki ke puncak untuk pemandangan panorama lembah yang ajaib saat matahari terbit.</p>
                     </div>
                 </div>
@@ -243,12 +245,27 @@
                         <p class="text-gray-700">Membentang hijau bagai permadani alam, menciptakan lukisan cahaya yang menenangkan jiwa saat mentari menembus celah pepohonan.</p>
                     </div>
                 </div>
-                 <!-- Attraction Card -->
+                <!-- Attraction Card -->
                 <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300">
                     <img src="alam.webp" alt="Alam" class="w-full h-56 object-cover cursor-pointer image-gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Alam';">
                     <div class="p-6">
                         <h3 class="text-2xl font-bold mb-2 text-gray-900">Keindahan Alam</h3>
                         <p class="text-gray-700">Setiap suara ranting, desir angin, dan kicauan burung adalah irama alam yang menyambut setiap tamu dengan ketulusan.</p>
+                    </div>
+                <!-- Attraction Card -->
+                </div>
+                <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300">
+                    <img src="gtatte.webp" alt="Alam" class="w-full h-56 object-cover cursor-pointer image-gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Alam';">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-gray-900">Gunung Tatte Toraya</h3>
+                        <p class="text-gray-700">Di puncak Gunung Tatte, langit terasa lebih dekat, dan hati pun lebih tenang.Gunung Tatte bukan sekadar tempat tinggi, tapi tempat hati menemukan damai.</p>
+                    </div>
+                </div>
+                <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300">
+                    <img src="pdh.webp" alt="Alam" class="w-full h-56 object-cover cursor-pointer image-gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Alam';">
+                    <div class="p-6">
+                        <h3 class="text-2xl font-bold mb-2 text-gray-900">Padi Gunung</h3>
+                        <p class="text-gray-700">Bertani di gunung, bukan soal hasil semata, tapi tentang menjaga warisan dan mencintai bumi.Tak peduli curamnya lereng dan dinginnya angin, padi gunung tetap setia memberi kehidupan</p>
                     </div>
                 </div>
             </div>
@@ -306,9 +323,24 @@
                 <h2 class="text-4xl font-bold text-gray-900 mb-6 text-center">Tentang Desa Paminggalan</h2>
                 <div class="flex flex-col items-center gap-8">
                     <img src="desa01.webp" alt="Pemandangan Desa" class="w-full md:w-1/2 h-auto max-h-[500px] rounded-lg object-cover shadow-md cursor-pointer image-gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/800x500/e2e8f0/475569?text=Desa';">
-                    <div class="text-gray-700 text-justify space-y-4 text-lg leading-relaxed">
+                    <div class="text-gray-700 text-justify space-y-6 text-lg leading-relaxed">
                         <p>Terletak di jantung alam, Desa Paminggalan adalah surga kedamaian yang melestarikan warisan alam dan budaya. Misi kami adalah mempraktikkan pariwisata berkelanjutan, memastikan setiap kunjungan mendukung masyarakat lokal dan melindungi lingkungan untuk generasi mendatang.</p>
-                        <p>Secara administratif, desa ini berada di Kecamatan Sendana dengan luas 2.296,99 hektar, terbagi menjadi empat dusun: Banua, Paminggalan, Paminggalan Utara, dan Kampung Baru. Kami mengundang Anda untuk merasakan keramahan kami, mempelajari tradisi kami, dan menciptakan kenangan yang tak terlupakan.</p>
+                        
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mb-2">Kondisi Geografis dan Lingkungan</h3>
+                            <p>Desa Paminggalan secara geografis terletak di daerah perbukitan dengan akses perjalanan yang cukup menantang, di mana kendaraan yang bisa menjangkau lokasi ini hanyalah motor atau mobil jeep. Meskipun medan menuju desa ini cukup terbatas, Paminggalan menyimpan potensi wisata alam yang indah dan masih alami, menjadikannya destinasi menarik bagi pecinta petualangan dan alam terbuka. Sayangnya, desa ini masih menghadapi masalah lingkungan, terutama kurangnya fasilitas tempat penampungan sampah. Hal ini menyebabkan sebagian masyarakat membuang sampah sembarangan ke sungai, yang dapat merusak ekosistem setempat.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mt-4 mb-2">Ekonomi dan UMKM</h3>
+                            <p>Sektor ekonomi desa didukung oleh berbagai UMKM yang cukup aktif, seperti produksi gula aren, pengolahan kemiri, hasil tangkapan udang, serta keberadaan beberapa kios kecil yang melayani kebutuhan warga dan pengunjung.</p>
+                        </div>
+
+                        <div>
+                            <h3 class="text-2xl font-bold text-gray-800 mt-4 mb-2">Demografi dan Sosial</h3>
+                            <p>Desa Paminggalan dihuni oleh <strong>191 keluarga</strong> dengan total penduduk sebanyak <strong>598 jiwa</strong>, terdiri dari 289 laki-laki dan 309 perempuan. Sebagian besar penduduk (404 jiwa) berada dalam usia produktif, sedangkan usia non-produktif (usia 0–14 tahun dan di atas 65 tahun) berjumlah 194 jiwa. Rasio beban tanggungan penduduk desa ini sebesar 48 persen, yang berarti setiap 100 orang usia produktif menanggung sekitar 48 orang usia non-produktif.</p>
+                            <p>Dari sisi pendidikan, mayoritas penduduk memiliki ijazah SD/sederajat (<strong>33,78%</strong>). Penduduk yang tidak memiliki ijazah juga cukup tinggi, yaitu <strong>33,11%</strong>. Untuk tingkat SMP/sederajat sebanyak 102 jiwa (17,06%), SMA/sederajat 75 jiwa (12,54%), dan sisanya (kurang dari 3%) memiliki ijazah D-1 hingga S-2.</p>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -382,6 +414,19 @@
                 </p>
                 <div class="h-[80vh] bg-gray-200 flex justify-center items-center rounded-lg shadow-inner">
                     <embed src="eBOOKLET.pdf" width="100%" height="100%" type="application/pdf" class="rounded-lg">
+                </div>    
+            </div>        
+        </div>
+
+         <!-- SOP -->
+        <div id="SOP" class="page-content hidden">
+            <div class="bg-white/90 backdrop-blur-sm p-4 sm:p-6 rounded-lg shadow-lg max-w-7xl mx-auto">
+                <h2 class="text-4xl font-bold text-gray-900 mb-2 text-center">SOP Desa Paminggalan</h2>
+                <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">
+                    Silakan lihat Standard Operating Procedure kami mengenai Desa Paminggalan.
+                </p>
+                <div class="h-[80vh] bg-gray-200 flex justify-center items-center rounded-lg shadow-inner">
+                    <embed src="SOP.pdf" width="100%" height="100%" type="application/pdf" class="rounded-lg">
                 </div>    
             </div>        
         </div>
