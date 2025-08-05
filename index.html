@@ -16,6 +16,10 @@
     <!-- Feather Icons -->
     <script src="https://unpkg.com/feather-icons"></script>
 
+    <!-- Swiper.js for Carousel -->
+    <link rel="stylesheet" href="https://unpkg.com/swiper/swiper-bundle.min.css" />
+    <script src="https://unpkg.com/swiper/swiper-bundle.min.js"></script>
+
     <style>
         /* Custom Styles */
         body {
@@ -121,6 +125,29 @@
         .image-modal-close:hover {
             transform: scale(1.1);
         }
+        
+        /* Swiper Carousel Styles */
+        .main-carousel {
+            width: 100%;
+            height: 60vh;
+        }
+        .swiper-button-next, .swiper-button-prev {
+            color: #ffffff;
+            background-color: rgba(0, 0, 0, 0.3);
+            border-radius: 50%;
+            width: 44px;
+            height: 44px;
+            transition: background-color 0.3s ease;
+        }
+        .swiper-button-next:hover, .swiper-button-prev:hover {
+            background-color: rgba(0, 0, 0, 0.5);
+        }
+        .swiper-button-next::after, .swiper-button-prev::after {
+            font-size: 20px;
+        }
+        .swiper-pagination-bullet-active {
+            background-color: #10b981;
+        }
     </style>
 </head>
 <body class="text-gray-800">
@@ -128,10 +155,10 @@
     <!-- Header & Navigation -->
     <header class="bg-white/80 backdrop-blur-md shadow-md sticky top-0 z-40">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
+            <div class="flex items-center justify-between h-20">
                 <!-- Left Side: Logo and Title -->
-                <div class="flex items-center space-x-3">
-                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Lambang_Kabupaten_Majene.png/500px-Lambang_Kabupaten_Majene.png" alt="Logo Kiri" class="h-10 w-10 rounded-full">
+                <div class="flex items-center space-x-4">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Lambang_Kabupaten_Majene.png/500px-Lambang_Kabupaten_Majene.png" alt="Logo Kiri" class="h-12 w-12 rounded-full">
                     <a href="#home" onclick="showPage('home', this.querySelector('.nav-link'))">
                         <span class="text-xl font-bold text-gray-900">Desa Paminggalan</span>
                     </a>
@@ -144,12 +171,13 @@
                         <a href="#profile" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('profile', this)">Profil Desa</a>
                         <a href="#umkm" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('umkm', this)">UMKM</a>
                         <a href="#about" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('about', this)">Tentang</a>
+                        <a href="#berita" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('berita', this)">Berita</a>
                         <a href="#contact" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('contact', this)">Kontak</a>
                         <a href="#map" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('map', this)">Peta</a>
                         <a href="#blooklet" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('blooklet', this)">e-Booklet</a>
                         <a href="#SOP" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('SOP', this)">SOP</a>
                     </nav>
-                    <img src="logo.webp" alt="Logo Kanan" class="hidden md:block h-10 w-10 rounded-full">
+                    <img src="logo.webp" alt="Logo Kanan" class="hidden md:block h-12 w-12 rounded-full">
                     
                     <!-- Mobile Menu Button -->
                     <div class="md:hidden">
@@ -168,6 +196,7 @@
                    <a href="#profile" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-emerald-500 hover:bg-gray-50" onclick="showPage('profile', this); closeMobileMenu();">Profil Desa</a>
                    <a href="#umkm" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-emerald-500 hover:bg-gray-50" onclick="showPage('umkm', this); closeMobileMenu();">UMKM</a>
                    <a href="#about" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-emerald-500 hover:bg-gray-50" onclick="showPage('about', this); closeMobileMenu();">Tentang</a>
+                   <a href="#berita" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-emerald-500 hover:bg-gray-50" onclick="showPage('berita', this); closeMobileMenu();">Berita</a>
                    <a href="#contact" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-emerald-500 hover:bg-gray-50" onclick="showPage('contact', this); closeMobileMenu();">Kontak</a>
                    <a href="#map" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-emerald-500 hover:bg-gray-50" onclick="showPage('map', this); closeMobileMenu();">Peta</a>
                    <a href="#blooklet" class="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-emerald-500 hover:bg-gray-50" onclick="showPage('blooklet', this); closeMobileMenu();">e-Booklet</a>
@@ -181,7 +210,33 @@
         <!-- Home Page -->
         <div id="home" class="page-content">
             <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-xl overflow-hidden">
-                <img src="desa.webp" alt="Pemandangan Desa Paminggalan" class="w-full h-[60vh] object-cover cursor-pointer image-gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/1200x600/e2e8f0/475569?text=Pemandangan+Desa';">
+                <!-- Swiper Carousel -->
+                <div class="swiper main-carousel">
+                    <div class="swiper-wrapper">
+                        <!-- Slide 1 -->
+                        <div class="swiper-slide">
+                            <img src="desa.webp" alt="Pemandangan Desa Paminggalan" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/1200x600/e2e8f0/475569?text=Pemandangan+Desa';">
+                        </div>
+                        <!-- Slide 2 -->
+                        <div class="swiper-slide">
+                            <img src="sgn.webp" alt="Air Terjun Palappang" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/1200x600/e2e8f0/475569?text=Air+Terjun';">
+                        </div>
+                        <!-- Slide 3 -->
+                        <div class="swiper-slide">
+                            <img src="ggn.webp" alt="Pemandangan Gunung" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/1200x600/e2e8f0/475569?text=Gunung';">
+                        </div>
+                        <!-- Slide 4 -->
+                        <div class="swiper-slide">
+                             <img src="sungai dkt d.webp" alt="Sungai Desa" class="w-full h-full object-cover" onerror="this.onerror=null;this.src='https://placehold.co/1200x600/e2e8f0/475569?text=Sungai';">
+                        </div>
+                    </div>
+                    <!-- Add Pagination -->
+                    <div class="swiper-pagination"></div>
+                    <!-- Add Navigation -->
+                    <div class="swiper-button-prev"></div>
+                    <div class="swiper-button-next"></div>
+                </div>
+
                 <div class="p-6 md:p-10 text-center">
                     <h1 class="text-4xl md:text-5xl font-bold text-gray-900 leading-tight">Temukan Keindahan Desa Paminggalan</h1>
                     <p class="mt-4 text-lg md:text-xl text-gray-600 max-w-3xl mx-auto">Perjalanan tak terlupakan Anda menuju alam, budaya, dan ketenangan dimulai di sini.</p>
@@ -194,6 +249,12 @@
                         <span>Paminggalan adalah wilayah terpencil di Kecamatan Sendana, Kabupaten Majene, Sulawesi Barat. Jaraknya hanya beberapa kilometer dari batas wilayah Desa Kalumammang, Kecamatan Alu, Kabupaten Polewali Mandar. Rute menuju Paminggalan sama dengan rute menuju Desa Kalumammang, di mana kami harus melintasi beberapa anak sungai kecil tanpa jembatan. Roda sepeda motor harus bersentuhan langsung dengan dasar sungai, yang menjadi tantangan besar terutama saat musim hujan, karena lalu lintas bisa terputus total.</span>
                         <span>Satu hal yang terlintas dalam benak saya sebelum berangkat adalah jaraknya yang jauh dan iklimnya yang dingin. Namun, perjalanan tetap kami lanjutkan. Kami memulai perjalanan dari Makassar dan menginap selama dua hari di rumah kepala desa di Kecamatan Sendana. Tepat pukul 13.00, kami melanjutkan perjalanan ke Paminggalan dengan mobil jip, melewati jalanan yang berliku-liku. Setibanya di sana, kami disambut dengan hangat oleh masyarakat Desa Paminggalan.</span>
                     </p>
+                </div>
+                <div class="p-4 bg-gray-50/80">
+                    <video width="100%" controls class="rounded-lg shadow-md max-w-full h-auto">
+                        <source src="alg.mp4" type="video/mp4">
+                        Video tidak dapat diputar di browser Anda.
+                    </video>
                 </div>
                 <div class="p-4 bg-gray-50/80">
                     <video width="100%" controls class="rounded-lg shadow-md max-w-full h-auto">
@@ -306,10 +367,21 @@
                 </div>
                 <!-- UMKM Card -->
                 <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
-                    <img src="udang.webp" alt="Udang Sungai" class="w-full h-56 object-cover cursor-pointer image-gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Udang';">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMA0aSEyqKR6LOsCtWGw78Q8VmEoBz3JOGyw&s" alt="Udang Sungai" class="w-full h-56 object-cover cursor-pointer image-gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Udang';">
                     <div class="p-6 flex-grow flex flex-col">
-                        <h3 class="text-2xl font-bold mb-2 text-gray-900">Udang Sungai</h3> 
-                        <p class="text-gray-700 mb-4 flex-grow">Udang segar yang ditangkap dari perairan bersih dan lingkungan terjaga di sekitar desa, menjamin kualitas alaminya.</p>
+                        <h3 class="text-2xl font-bold mb-2 text-gray-900">Cengkeh</h3> 
+                        <p class="text-gray-700 mb-4 flex-grow">Aroma cengkeh dari Paminggalan, harum hingga hati membawa cerita dari tanah yang sederhana. Cengkeh terbaik tak perlu dicari jauh, cukup dari Desa Paminggalan wangi, murni, dan penuh cinta.</p>
+                        <a href="https://wa.me/6281242830127" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex items-center justify-center px-4 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 transition-colors">
+                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99 0-3.903-.52-5.586-1.456l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.267.655 4.398 1.803 6.12l-1.34 4.893 4.91-1.305z"/></svg>
+                            WhatsApp
+                        </a>
+                    </div>
+                </div>
+                <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVptxHFhHRXdmGZR-CHIzfQMHrHsXwenqBOA&s" alt="Udang Sungai" class="w-full h-56 object-cover cursor-pointer image-gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Udang';">
+                    <div class="p-6 flex-grow flex flex-col">
+                        <h3 class="text-2xl font-bold mb-2 text-gray-900">Golla kambu</h3> 
+                        <p class="text-gray-700 mb-4 flex-grow">Golla Kambu adalah salah satu kuliner khas Desa Paminggalan yang dibuat dari campuran kelapa parut dan gula merah, lalu dibentuk bulat dan padat. Dibuat dengan tangan-tangan penuh ketelatenan, Golla Kambu bukan sekadar makanan, tapi bagian dari identitas dan warisan budaya.</p>
                         <a href="https://wa.me/6281242830127" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex items-center justify-center px-4 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 transition-colors">
                             <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99 0-3.903-.52-5.586-1.456l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.267.655 4.398 1.803 6.12l-1.34 4.893 4.91-1.305z"/></svg>
                             WhatsApp
@@ -330,7 +402,7 @@
                         
                         <div>
                             <h3 class="text-2xl font-bold text-gray-800 mb-2">Kondisi Geografis dan Lingkungan</h3>
-                            <p>Desa Paminggalan secara geografis terletak di daerah perbukitan dengan akses perjalanan yang cukup menantang, di mana kendaraan yang bisa menjangkau lokasi ini hanyalah motor atau mobil jeep. Meskipun medan menuju desa ini cukup terbatas, Paminggalan menyimpan potensi wisata alam yang indah dan masih alami, menjadikannya destinasi menarik bagi pecinta petualangan dan alam terbuka. Sayangnya, desa ini masih menghadapi masalah lingkungan, terutama kurangnya fasilitas tempat penampungan sampah. Hal ini menyebabkan sebagian masyarakat membuang sampah sembarangan ke sungai, yang dapat merusak ekosistem setempat.</p>
+                            <p>Desa Paminggalan secara geografis terletak di daerah perbukitan dengan akses perjalanan yang cukup menantang, di mana kendaraan yang bisa menjangkau lokasi ini hanyalah motor atau mobil jeep. Meskipun medannya terbatas, Paminggalan menyimpan potensi besar untuk menjadi desa wisata berkat keindahan alamnya yang masih alami. Namun, potensi ini menghadapi tantangan lingkungan. Sayangnya, karena tidak adanya tempat pembuangan sampah yang memadai, beberapa titik di sepanjang sungai telah menjadi lokasi pembuangan sampah oleh masyarakat, yang dapat merusak ekosistem dan keindahan alam setempat.</p>
                         </div>
 
                         <div>
@@ -345,6 +417,18 @@
                         </div>
                     </div>
                 </div>
+            </div>
+        </div>
+        
+        <!-- News Page -->
+        <div id="berita" class="page-content hidden">
+            <div class="bg-white/90 backdrop-blur-sm p-6 rounded-lg shadow-lg mb-12 max-w-4xl mx-auto text-center">
+                <h2 class="text-4xl font-bold text-gray-900 mb-4">Berita Terbaru</h2>
+                <p class="text-lg text-gray-600 max-w-3xl mx-auto">Ikuti berita dan informasi terbaru dari Mandar News.</p>
+            </div>
+            <div id="news-container" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- News articles will be loaded here by JavaScript -->
+                <p class="text-center col-span-full">Memuat berita...</p>
             </div>
         </div>
 
@@ -460,6 +544,28 @@
             // --- Feather Icons Initialization ---
             feather.replace();
 
+            // --- Swiper Initialization ---
+            const swiper = new Swiper('.main-carousel', {
+                loop: true,
+                autoplay: {
+                    delay: 3000,
+                    disableOnInteraction: false,
+                    pauseOnMouseEnter: true,
+                },
+                pagination: {
+                    el: '.swiper-pagination',
+                    clickable: true,
+                },
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                effect: 'fade',
+                fadeEffect: {
+                    crossFade: true
+                },
+            });
+
             // --- Page Navigation Logic ---
             const pages = document.querySelectorAll('.page-content');
             const navLinks = document.querySelectorAll('.nav-link');
@@ -506,9 +612,88 @@
             imageModal.addEventListener('click', (event) => {
                 if (event.target === imageModal) closeModal();
             });
+            
+            // --- News Feed Logic ---
+            async function fetchAndDisplayNews() {
+                const newsContainer = document.getElementById('news-container');
+                const rssUrls = [
+                    'https://kompadansamandar.blogspot.com/feeds/posts/default',
+                    // 'https://mandarnews.com/feed/' // Removed due to consistent errors
+                ];
+                const apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=';
+
+                try {
+                    const fetchPromises = rssUrls.map(url => fetch(`${apiUrl}${encodeURIComponent(url)}`));
+                    const results = await Promise.allSettled(fetchPromises);
+
+                    const jsonPromises = results.map(async result => {
+                        if (result.status === 'fulfilled') {
+                            const response = result.value;
+                            if (!response.ok) {
+                                console.error(`HTTP error! status: ${response.status} for ${response.url}`);
+                                return null;
+                            }
+                            return response.json();
+                        } else {
+                            console.error('A fetch promise was rejected:', result.reason);
+                            return null;
+                        }
+                    });
+
+                    const dataSources = await Promise.all(jsonPromises);
+                    
+                    let allItems = [];
+                    dataSources.forEach(source => {
+                        if (source && source.status === 'ok' && source.items) {
+                            allItems = allItems.concat(source.items);
+                        }
+                    });
+
+                    allItems.sort((a, b) => new Date(b.pubDate) - new Date(a.pubDate));
+
+                    if (allItems.length > 0) {
+                        newsContainer.innerHTML = ''; // Clear loading message
+                        allItems.forEach(item => {
+                            const tempDiv = document.createElement('div');
+                            tempDiv.innerHTML = item.description;
+
+                            const firstImage = tempDiv.querySelector('img');
+                            const imageUrl = firstImage ? firstImage.src : 'https://placehold.co/600x400/e2e8f0/475569?text=Berita';
+                            const snippet = tempDiv.textContent.trim().substring(0, 120) + '...';
+                            const pubDate = new Date(item.pubDate).toLocaleDateString('id-ID', {
+                                day: 'numeric',
+                                month: 'long',
+                                year: 'numeric'
+                            });
+
+                            const newsCard = `
+                                <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden flex flex-col transform hover:-translate-y-2 transition-transform duration-300">
+                                    <img src="${imageUrl}" alt="${item.title}" class="w-full h-48 object-cover">
+                                    <div class="p-6 flex flex-col flex-grow">
+                                        <h3 class="text-xl font-bold text-gray-900 mb-2">${item.title}</h3>
+                                        <p class="text-sm text-gray-500 mb-3">${pubDate}</p>
+                                        <p class="text-gray-700 mb-4 flex-grow">${snippet}</p>
+                                        <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="mt-auto inline-block text-emerald-600 font-semibold hover:underline">
+                                            Baca Selengkapnya &rarr;
+                                        </a>
+                                    </div>
+                                </div>
+                            `;
+                            newsContainer.innerHTML += newsCard;
+                        });
+                    } else {
+                        newsContainer.innerHTML = '<p class="text-center col-span-full">Tidak ada berita yang ditemukan.</p>';
+                    }
+                } catch (error) {
+                    console.error('Error fetching news:', error);
+                    newsContainer.innerHTML = '<p class="text-center col-span-full text-red-500">Gagal memuat berita. Silakan coba lagi nanti.</p>';
+                }
+            }
+
 
             // --- Initial Page Load ---
             showPage('home', document.querySelector('.nav-link[href="#home"]'));
+            fetchAndDisplayNews();
         });
     </script>
 </body>
