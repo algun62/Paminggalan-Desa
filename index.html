@@ -129,31 +129,34 @@
     <header class="bg-white/80 backdrop-blur-md shadow-md sticky top-0 z-40">
         <div class="container mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex items-center justify-between h-16">
-                <!-- Logo / Village Name -->
-                <div class="flex-shrink-0">
-                    <a href="#home" onclick="showPage('home', this.querySelector('.nav-link'))" class="flex items-center space-x-2">
-                        <i data-feather="sun" class="text-emerald-500"></i>
+                <!-- Left Side: Logo and Title -->
+                <div class="flex items-center space-x-3">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/thumb/0/06/Lambang_Kabupaten_Majene.png/500px-Lambang_Kabupaten_Majene.png" alt="Logo Kiri" class="h-10 w-10 rounded-full">
+                    <a href="#home" onclick="showPage('home', this.querySelector('.nav-link'))">
                         <span class="text-xl font-bold text-gray-900">Desa Paminggalan</span>
                     </a>
                 </div> 
 
-                <!-- Desktop Navigation -->
-                <nav class="hidden md:flex space-x-8">
-                    <a href="#home" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out active" onclick="showPage('home', this)">Beranda</a>
-                    <a href="#profile" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('profile', this)">Profil Desa</a>
-                    <a href="#umkm" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('umkm', this)">UMKM</a>
-                    <a href="#about" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('about', this)">Tentang</a>
-                    <a href="#contact" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('contact', this)">Kontak</a>
-                    <a href="#map" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('map', this)">Peta</a>
-                    <a href="#blooklet" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('blooklet', this)">e-Booklet</a>
-                    <a href="#SOP" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('SOP', this)">SOP</a>
-                </nav>
-                
-                <!-- Mobile Menu Button -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-button" class="text-gray-600 hover:text-emerald-500 focus:outline-none">
-                        <i data-feather="menu" class="w-6 h-6"></i>
-                    </button>
+                <!-- Right Side: Nav, Right Logo, Mobile Button -->
+                <div class="flex items-center space-x-4">
+                    <nav class="hidden md:flex space-x-8">
+                        <a href="#home" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out active" onclick="showPage('home', this)">Beranda</a>
+                        <a href="#profile" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('profile', this)">Profil Desa</a>
+                        <a href="#umkm" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('umkm', this)">UMKM</a>
+                        <a href="#about" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('about', this)">Tentang</a>
+                        <a href="#contact" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('contact', this)">Kontak</a>
+                        <a href="#map" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('map', this)">Peta</a>
+                        <a href="#blooklet" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('blooklet', this)">e-Booklet</a>
+                        <a href="#SOP" class="nav-link text-gray-600 hover:text-emerald-500 transition duration-150 ease-in-out" onclick="showPage('SOP', this)">SOP</a>
+                    </nav>
+                    <img src="logo.webp" alt="Logo Kanan" class="hidden md:block h-10 w-10 rounded-full">
+                    
+                    <!-- Mobile Menu Button -->
+                    <div class="md:hidden">
+                        <button id="mobile-menu-button" class="text-gray-600 hover:text-emerald-500 focus:outline-none">
+                            <i data-feather="menu" class="w-6 h-6"></i>
+                        </button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -252,7 +255,6 @@
                         <h3 class="text-2xl font-bold mb-2 text-gray-900">Keindahan Alam</h3>
                         <p class="text-gray-700">Setiap suara ranting, desir angin, dan kicauan burung adalah irama alam yang menyambut setiap tamu dengan ketulusan.</p>
                     </div>
-                <!-- Attraction Card -->
                 </div>
                 <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300">
                     <img src="gtatte.webp" alt="Alam" class="w-full h-56 object-cover cursor-pointer image-gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Alam';">
