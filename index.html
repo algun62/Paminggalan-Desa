@@ -240,6 +240,61 @@
                     </p>
                 </div>
             </div>
+
+            <!-- Berita Terkini Section -->
+            <div class="mt-12 bg-white/90 backdrop-blur-sm rounded-lg shadow-xl overflow-hidden">
+                <div class="p-6 md:p-10">
+                    <div class="flex justify-between items-center border-b-2 border-emerald-500 pb-2 mb-6">
+                        <h2 class="text-2xl md:text-3xl font-bold text-gray-900">Seputar Sulawesi Barat</h2>
+                        <a href="https://mandarnews.com/" target="_blank" rel="noopener noreferrer" class="text-emerald-600 font-semibold hover:underline">
+                            Lihat Semua &rarr;
+                        </a>
+                    </div>
+                    <div id="home-news-section" class="grid grid-cols-1 md:grid-cols-12 gap-8">
+                        <!-- Latest News Column (Left) -->
+                        <div id="home-latest-news" class="md:col-span-3 space-y-4">
+                            <p class="text-center py-10">Memuat berita...</p>
+                        </div>
+                        <!-- Main News Column (Center) -->
+                        <div id="home-main-news" class="md:col-span-6">
+                            <p class="text-center py-10">Memuat berita utama...</p>
+                        </div>
+                        <!-- Trending News Column (Right) -->
+                        <div id="home-trending-news" class="md:col-span-3">
+                             <p class="text-center py-10">Memuat trending...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Additional News Sections -->
+            <div class="mt-12 grid grid-cols-1 lg:grid-cols-3 gap-8">
+                <!-- Post List 1 -->
+                <div id="post-list-1" class="bg-white/90 backdrop-blur-sm rounded-lg shadow-xl p-6">
+                    <h3 class="font-bold text-xl border-b pb-2 mb-4">Pendidikan & Sosial</h3>
+                    <div class="space-y-4">
+                        <!-- Content will be injected by JS -->
+                        <p class="text-center py-5">Memuat...</p>
+                    </div>
+                </div>
+                <!-- Post List 2 -->
+                <div id="post-list-2" class="bg-white/90 backdrop-blur-sm rounded-lg shadow-xl p-6">
+                    <h3 class="font-bold text-xl border-b pb-2 mb-4">Pilkada & Politik</h3>
+                     <div class="space-y-4">
+                        <!-- Content will be injected by JS -->
+                        <p class="text-center py-5">Memuat...</p>
+                    </div>
+                </div>
+                <!-- Post List 3 -->
+                <div id="post-list-3" class="bg-white/90 backdrop-blur-sm rounded-lg shadow-xl p-6">
+                    <h3 class="font-bold text-xl border-b pb-2 mb-4">Info Lainnya</h3>
+                     <div class="space-y-4">
+                        <!-- Content will be injected by JS -->
+                         <p class="text-center py-5">Memuat...</p>
+                    </div>
+                </div>
+            </div>
+
         </div>
 
         <!-- Village Profile Page -->
@@ -740,12 +795,11 @@
                 if (event.target === detailModal) closeModal(detailModal);
             });
             
-            // --- News Feed Logic ---
+            // --- News Feed Logic for #berita page ---
             async function fetchAndDisplayNews() {
                 const newsContainer = document.getElementById('news-container');
-                const rssUrls = [
-                    'https://kompadansamandar.blogspot.com/feeds/posts/default',
-                ];
+                // FIXED: Changed the problematic RSS URL to a working one.
+                const rssUrls = ['https://mandarnews.com/feed/'];
                 const apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=';
 
                 try {
@@ -815,11 +869,185 @@
                     newsContainer.innerHTML = '<p class="text-center col-span-full text-red-500">Gagal memuat berita. Silakan coba lagi nanti.</p>';
                 }
             }
+            
+            // --- Home News Feed Logic for #home page ---
+            async function fetchAndDisplayHomeNews() {
+                const latestNewsContainer = document.getElementById('home-latest-news');
+                const mainNewsContainer = document.getElementById('home-main-news');
+                const trendingNewsContainer = document.getElementById('home-trending-news');
+                const rssUrl = 'https://mandarnews.com/feed/';
+                const apiUrl = `https://api.rss2json.com/v1/api.json?rss_url=${encodeURIComponent(rssUrl)}`;
+
+                try {
+                    const response = await fetch(apiUrl);
+                    if (!response.ok) {
+                        throw new Error(`HTTP error! status: ${response.status}`);
+                    }
+                    const data = await response.json();
+
+                    if (data.status === 'ok' && data.items && data.items.length > 0) {
+                        const allItems = data.items;
+
+                        // --- Main Article (Center) ---
+                        const mainItem = allItems[0];
+                        if (mainItem) {
+                            const tempDivMain = document.createElement('div');
+                            tempDivMain.innerHTML = mainItem.description;
+                            const mainImage = tempDivMain.querySelector('img');
+                            const mainImageUrl = mainImage ? mainImage.src : 'https://placehold.co/800x450/e2e8f0/475569?text=Berita+Utama';
+                            
+                            mainNewsContainer.innerHTML = `
+                                <a href="${mainItem.link}" target="_blank" rel="noopener noreferrer" class="block rounded-lg overflow-hidden group h-full flex flex-col relative">
+                                    <img src="${mainImageUrl}" alt="${mainItem.title}" class="w-full h-full object-cover transition-transform duration-300 group-hover:scale-105">
+                                    <div class="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 via-black/50 to-transparent p-6">
+                                        <h3 class="text-2xl font-bold text-white mb-2 leading-tight">${mainItem.title}</h3>
+                                        <p class="text-sm text-gray-300">${new Date(mainItem.pubDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'long', year: 'numeric' })}</p>
+                                    </div>
+                                </a>
+                            `;
+                        } else {
+                             mainNewsContainer.innerHTML = ''; 
+                        }
+
+                        // --- Latest News (Left) ---
+                        const latestItems = allItems.slice(1, 5); // Articles 2 to 5
+                        if (latestItems.length > 0) {
+                            latestNewsContainer.innerHTML = '<h3 class="font-bold text-xl border-b pb-2 mb-4">Terbaru</h3>';
+                            latestItems.forEach(item => {
+                                const tempDivList = document.createElement('div');
+                                tempDivList.innerHTML = item.description;
+                                const listImage = tempDivList.querySelector('img');
+                                const listImageUrl = listImage ? listImage.src : 'https://placehold.co/150x100/e2e8f0/475569?text=Berita';
+
+                                latestNewsContainer.innerHTML += `
+                                    <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="block group">
+                                        <div class="flex items-start space-x-4">
+                                            <img src="${listImageUrl}" alt="${item.title}" class="w-20 h-20 object-cover rounded-md flex-shrink-0">
+                                            <div>
+                                                <h4 class="font-semibold text-gray-800 leading-tight group-hover:text-emerald-600 transition-colors">${item.title}</h4>
+                                                 <p class="text-xs text-gray-500 mt-1">${new Date(item.pubDate).toLocaleDateString('id-ID', { day: 'numeric', month: 'long' })}</p>
+                                            </div>
+                                        </div>
+                                    </a>
+                                `;
+                            });
+                        } else {
+                             latestNewsContainer.innerHTML = '';
+                        }
+                        
+                        // --- Trending News (Right) ---
+                        const trendingItems = allItems.slice(5, 10); // Articles 6 to 10
+                        if (trendingItems.length > 0) {
+                            trendingNewsContainer.innerHTML = '<h3 class="font-bold text-xl border-b pb-2 mb-4">Trending</h3>';
+                            trendingItems.forEach((item, index) => {
+                                trendingNewsContainer.innerHTML += `
+                                    <a href="${item.link}" target="_blank" rel="noopener noreferrer" class="block group">
+                                        <div class="flex items-start space-x-4">
+                                            <span class="text-3xl font-bold text-gray-300 group-hover:text-emerald-500 transition-colors">${index + 1}</span>
+                                            <div>
+                                                <h4 class="font-semibold text-gray-800 leading-tight group-hover:text-emerald-600 transition-colors">${item.title}</h4>
+                                            </div>
+                                        </div>
+                                    </a>
+                                    ${index < trendingItems.length - 1 ? '<hr class="my-3">' : ''}
+                                `;
+                            });
+                        } else {
+                             trendingNewsContainer.innerHTML = '';
+                        }
+
+
+                    } else {
+                        throw new Error('Failed to fetch news from RSS feed.');
+                    }
+                } catch (error) {
+                    console.error('Error fetching home news:', error);
+                    const errorMessage = '<p class="text-center col-span-full text-red-500">Gagal memuat berita terkini. Sumber berita mungkin sedang tidak tersedia.</p>';
+                    document.getElementById('home-news-section').innerHTML = errorMessage;
+                }
+            }
+            
+            // --- Additional News Lists Logic ---
+            const postLists = {
+                'post-list-1': [
+                    'https://mandarnews.com/dies-natalis-ke-21-stikes-bina-bangsa-majene-dapat-kado-istimewa-pemberian-tanah-hibah-dari-pemda-hingga-keluarnya-izin-pembukaan-prodi-baru/',
+                    'https://mandarnews.com/peringati-dies-natalis-ke-21-komitmen-stikes-bina-bangsa-majene-menuju-universitas/',
+                    'https://mandarnews.com/anak-berkebutuhan-khusus-butuh-kendaraan-antar-jemput/',
+                    'https://mandarnews.com/disdikpora-majene-gelar-sosialisasi-spmb-jenjang-sd-smp-tahun-2025/'
+                ],
+                'post-list-2': [
+                    'https://mandarnews.com/rapat-pleno-terbuka-kpu-mamasa-tentang-rekapitulasi-pemilihan-pilkada-2024/',
+                    'https://mandarnews.com/distribusi-logistik-pilkada-2024-oleh-kpu-mamasa/',
+                    'https://mandarnews.com/22-modus-kejahatan-media-dalam-politik-pemilu/',
+                    'https://mandarnews.com/h-damris-selamat-buat-ananda-khalil-qibran/'
+                ],
+                'post-list-3': [
+                    'https://mandarnews.com/smkn-balanipa-sponsori-lomba-sandeq-race-2024/',
+                    'https://mandarnews.com/tarian-sibaliparri-tampil-memukau-dalam-pembukaan-festival-sipamandar-2024/',
+                    'https://mandarnews.com/sekilas-tentang-perahu-sandeq-sinar-banggae/',
+                    'https://mandarnews.com/sdn-28-tamo-tampil-memukau-dalam-festival-teluk-mandar/'
+                ]
+            };
+
+            async function fetchArticleDetails(url) {
+                // This is a simplified fetch. In a real scenario, you'd need a backend or a CORS proxy
+                // to scrape the content from the URL. We'll simulate this by just using the title from the URL.
+                try {
+                    // A real implementation would fetch and parse the HTML from the URL.
+                    // For this demo, we create a mock title.
+                    const path = url.split('/').filter(Boolean).pop();
+                    const title = path.replace(/-/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+                    // In a real scenario, you'd also extract an image URL.
+                    const imageUrl = 'https://placehold.co/800x450/e2e8f0/475569?text=Berita';
+                    return { title, url, imageUrl };
+                } catch (e) {
+                    console.error(`Could not fetch details for ${url}`, e);
+                    return null;
+                }
+            }
+
+            async function populatePostList(listId, urls) {
+                const container = document.getElementById(listId).querySelector('.space-y-4');
+                if (!urls || urls.length === 0) {
+                    container.innerHTML = '<p>Tidak ada berita untuk ditampilkan.</p>';
+                    return;
+                }
+                
+                container.innerHTML = ''; // Clear loading message
+
+                const articlePromises = urls.map(fetchArticleDetails);
+                const articles = await Promise.all(articlePromises);
+
+                articles.forEach((article, index) => {
+                    if (article) {
+                         if (index === 0) { // First item is bigger
+                            container.innerHTML += `
+                                <a href="${article.url}" target="_blank" rel="noopener noreferrer" class="block group">
+                                    <img src="${article.imageUrl}" alt="${article.title}" class="w-full h-40 object-cover rounded-lg mb-2">
+                                    <h4 class="font-bold text-lg text-gray-800 leading-tight group-hover:text-emerald-600 transition-colors">${article.title}</h4>
+                                </a>
+                                <hr class="my-4">
+                            `;
+                        } else {
+                            container.innerHTML += `
+                                <a href="${article.url}" target="_blank" rel="noopener noreferrer" class="block group">
+                                    <h4 class="font-semibold text-gray-800 leading-tight group-hover:text-emerald-600 transition-colors">${article.title}</h4>
+                                </a>
+                                ${index < articles.length - 1 ? '<hr class="my-3">' : ''}
+                            `;
+                        }
+                    }
+                });
+            }
 
 
             // --- Initial Page Load ---
             showPage('home', document.querySelector('.nav-link[href="#home"]'));
-            fetchAndDisplayNews();
+            fetchAndDisplayNews(); // For #berita page
+            fetchAndDisplayHomeNews(); // For #home page
+            populatePostList('post-list-1', postLists['post-list-1']);
+            populatePostList('post-list-2', postLists['post-list-2']);
+            populatePostList('post-list-3', postLists['post-list-3']);
         });
     </script>
 </body>
