@@ -64,8 +64,8 @@
             to { opacity: 1; transform: translateY(0); }
         }
         
-        /* Modal for image display */
-        .image-modal-backdrop {
+        /* Modal Styles */
+        .modal-backdrop {
             position: fixed;
             top: 0;
             left: 0;
@@ -81,34 +81,22 @@
             transition: opacity 0.3s ease, visibility 0.3s ease;
         }
 
-        .image-modal-backdrop.show {
+        .modal-backdrop.show {
             opacity: 1;
             visibility: visible;
         }
 
-        .image-modal-content {
+        .modal-content {
             position: relative;
-            max-width: 90vw;
-            max-height: 90vh;
             transform: scale(0.95);
             transition: transform 0.3s ease;
         }
         
-        .image-modal-backdrop.show .image-modal-content {
+        .modal-backdrop.show .modal-content {
             transform: scale(1);
         }
 
-        .image-modal-content img {
-            width: auto;
-            height: auto;
-            max-width: 100%;
-            max-height: 90vh; /* Limit image height to fit screen */
-            object-fit: contain;
-            border-radius: 0.5rem;
-            box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
-        }
-
-        .image-modal-close {
+        .modal-close {
             position: absolute;
             top: -1.5rem;
             right: -1.5rem;
@@ -123,7 +111,7 @@
             transition: transform 0.2s ease;
         }
 
-        .image-modal-close:hover {
+        .modal-close:hover {
             transform: scale(1.1);
         }
         
@@ -251,6 +239,17 @@
                         <span>Satu hal yang terlintas dalam benak saya sebelum berangkat adalah jaraknya yang jauh dan iklimnya yang dingin. Namun, perjalanan tetap kami lanjutkan. Kami memulai perjalanan dari Makassar dan menginap selama dua hari di rumah kepala desa di Kecamatan Sendana. Tepat pukul 13.00, kami melanjutkan perjalanan ke Paminggalan dengan mobil jip, melewati jalanan yang berliku-liku. Setibanya di sana, kami disambut dengan hangat oleh masyarakat Desa Paminggalan.</span>
                     </p>
                 </div>
+                <div class="p-4 bg-gray-50/80">
+                    <video width="100%" controls class="rounded-lg shadow-md max-w-full h-auto">
+                        <source src="avpm.mp4" type="video/mp4">
+                        Video tidak dapat diputar di browser Anda.
+                    </video>
+                </div>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 p-4 bg-gray-50/80">
+                    <img src="gn.webp" alt="Alam 1" class="w-full h-64 object-cover rounded-lg shadow-md cursor-pointer image-gallery-item transition-transform duration-300 hover:scale-105" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Alam+1';">
+                    <img src="gn01.webp" alt="Alam 2" class="w-full h-64 object-cover rounded-lg shadow-md cursor-pointer image-gallery-item transition-transform duration-300 hover:scale-105" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Alam+2';">
+                    <img src="gn02.webp" alt="Alam 3" class="w-full h-64 object-cover rounded-lg shadow-md cursor-pointer image-gallery-item transition-transform duration-300 hover:scale-105" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Alam+3';">
+                </div>
             </div>
         </div>
 
@@ -262,57 +261,78 @@
             </div>
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
                 <!-- Attraction Card -->
-                <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300">
+                <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
                     <img src="air terjun.webp" alt="Air Terjun Palappang" class="w-full h-56 object-cover cursor-pointer image-gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Air+Terjun';">
-                    <div class="p-6">
+                    <div class="p-6 flex flex-col flex-grow">
                         <h3 class="text-2xl font-bold mb-2 text-gray-900">Air Terjun Palappang</h3>
-                        <p class="text-gray-700">Air terjun eksotis yang belum banyak tersentuh, sempurna untuk berenang atau sekadar menikmati kesegaran alam.</p>
+                        <p class="text-gray-700 mb-4 flex-grow">Air terjun eksotis yang belum banyak tersentuh, sempurna untuk berenang atau sekadar menikmati kesegaran alam.</p>
+                        <button onclick="openDetailModal('air-terjun')" class="mt-auto inline-block bg-emerald-500 text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-emerald-600 transition-colors">
+                            Baca Selengkapnya
+                        </button>
                     </div>
                 </div>
                 <!-- Attraction Card -->
-                <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300">
+                <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
                     <img src="sungai dkt d.webp" alt="Sungai Desa" class="w-full h-56 object-cover cursor-pointer image-gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Sungai';">
-                    <div class="p-6">
+                    <div class="p-6 flex flex-col flex-grow">
                         <h3 class="text-2xl font-bold mb-2 text-gray-900">Sungai Paminggalan</h3>
-                        <p class="text-gray-700">Nikmati kesegaran alami dari sungai yang jernih, cocok untuk bersantai dan menikmati suasana pedesaan yang tenang.</p>
+                        <p class="text-gray-700 mb-4 flex-grow">Nikmati kesegaran alami dari sungai yang jernih, cocok untuk bersantai dan menikmati suasana pedesaan yang tenang.</p>
+                        <button onclick="openDetailModal('sungai')" class="mt-auto inline-block bg-emerald-500 text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-emerald-600 transition-colors">
+                            Baca Selengkapnya
+                        </button>
                     </div>
                 </div>
                 <!-- Attraction Card -->
-                <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300">
+                <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
                     <img src="gunung.webp" alt="Gunung Garonggong" class="w-full h-56 object-cover cursor-pointer image-gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Gunung';">
-                    <div class="p-6">
+                    <div class="p-6 flex flex-col flex-grow">
                         <h3 class="text-2xl font-bold mb-2 text-gray-900">Gunung Pukkotta</h3>
-                        <p class="text-gray-700">Saksi bisu sejarah dan kehidupan alam. Mendaki ke puncak untuk pemandangan panorama lembah yang ajaib saat matahari terbit.</p>
+                        <p class="text-gray-700 mb-4 flex-grow">Saksi bisu sejarah dan kehidupan alam. Mendaki ke puncak untuk pemandangan panorama lembah yang ajaib.</p>
+                        <button onclick="openDetailModal('gunung-pukkotta')" class="mt-auto inline-block bg-emerald-500 text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-emerald-600 transition-colors">
+                            Baca Selengkapnya
+                        </button>
                     </div>
                 </div>
                  <!-- Attraction Card -->
-                <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300">
+                <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
                     <img src="hutan.webp" alt="Hutan" class="w-full h-56 object-cover cursor-pointer image-gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Hutan';">
-                    <div class="p-6">
+                    <div class="p-6 flex flex-col flex-grow">
                         <h3 class="text-2xl font-bold mb-2 text-gray-900">Hutan Desa</h3>
-                        <p class="text-gray-700">Membentang hijau bagai permadani alam, menciptakan lukisan cahaya yang menenangkan jiwa saat mentari menembus celah pepohonan.</p>
+                        <p class="text-gray-700 mb-4 flex-grow">Membentang hijau bagai permadani alam, menciptakan lukisan cahaya yang menenangkan jiwa.</p>
+                        <button onclick="openDetailModal('hutan-desa')" class="mt-auto inline-block bg-emerald-500 text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-emerald-600 transition-colors">
+                            Baca Selengkapnya
+                        </button>
                     </div>
                 </div>
                 <!-- Attraction Card -->
-                <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300">
+                <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
                     <img src="alam.webp" alt="Alam" class="w-full h-56 object-cover cursor-pointer image-gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Alam';">
-                    <div class="p-6">
+                    <div class="p-6 flex flex-col flex-grow">
                         <h3 class="text-2xl font-bold mb-2 text-gray-900">Keindahan Alam</h3>
-                        <p class="text-gray-700">Setiap suara ranting, desir angin, dan kicauan burung adalah irama alam yang menyambut setiap tamu dengan ketulusan.</p>
+                        <p class="text-gray-700 mb-4 flex-grow">Setiap suara ranting, desir angin, dan kicauan burung adalah irama alam yang menyambut setiap tamu.</p>
+                         <button onclick="openDetailModal('keindahan-alam')" class="mt-auto inline-block bg-emerald-500 text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-emerald-600 transition-colors">
+                            Baca Selengkapnya
+                        </button>
                     </div>
                 </div>
-                <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300">
+                <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
                     <img src="gtatte.webp" alt="Alam" class="w-full h-56 object-cover cursor-pointer image-gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Alam';">
-                    <div class="p-6">
+                    <div class="p-6 flex flex-col flex-grow">
                         <h3 class="text-2xl font-bold mb-2 text-gray-900">Gunung ratte Toraya</h3>
-                        <p class="text-gray-700">Di puncak Gunung Tatte, langit terasa lebih dekat, dan hati pun lebih tenang.Gunung Tatte bukan sekadar tempat tinggi, tapi tempat hati menemukan damai.</p>
+                        <p class="text-gray-700 mb-4 flex-grow">Di puncak Gunung Tatte, langit terasa lebih dekat, dan hati pun lebih tenang.</p>
+                         <button onclick="openDetailModal('gunung-ratte')" class="mt-auto inline-block bg-emerald-500 text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-emerald-600 transition-colors">
+                            Baca Selengkapnya
+                        </button>
                     </div>
                 </div>
-                <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300">
+                <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
                     <img src="pdh.webp" alt="Alam" class="w-full h-56 object-cover cursor-pointer image-gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Alam';">
-                    <div class="p-6">
+                    <div class="p-6 flex flex-col flex-grow">
                         <h3 class="text-2xl font-bold mb-2 text-gray-900">Padi Gunung</h3>
-                        <p class="text-gray-700">Bertani di gunung, bukan soal hasil semata, tapi tentang menjaga warisan dan mencintai bumi.Tak peduli curamnya lereng dan dinginnya angin, padi gunung tetap setia memberi kehidupan</p>
+                        <p class="text-gray-700 mb-4 flex-grow">Bertani di gunung, bukan soal hasil semata, tapi tentang menjaga warisan dan mencintai bumi.</p>
+                         <button onclick="openDetailModal('padi-gunung')" class="mt-auto inline-block bg-emerald-500 text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-emerald-600 transition-colors">
+                            Baca Selengkapnya
+                        </button>
                     </div>
                 </div>
             </div>
@@ -330,11 +350,16 @@
                     <img src="kemirih.webp" alt="Kemiri" class="w-full h-56 object-cover cursor-pointer image-gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Kemiri';">
                     <div class="p-6 flex-grow flex flex-col">
                         <h3 class="text-2xl font-bold mb-2 text-gray-900">Kemiri Lokal</h3>
-                        <p class="text-gray-700 mb-4 flex-grow">Dipetik langsung dari kebun warga, kemiri dari tanah subur Paminggalan memiliki aroma khas dan kualitas tinggi.</p>
-                        <a href="https://wa.me/6281242830127" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex items-center justify-center px-4 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 transition-colors">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99 0-3.903-.52-5.586-1.456l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.267.655 4.398 1.803 6.12l-1.34 4.893 4.91-1.305z"/></svg>
-                            WhatsApp
-                        </a>
+                        <p class="text-gray-700 mb-4 flex-grow">Dipetik langsung dari kebun warga, kemiri Paminggalan memiliki aroma khas dan kualitas tinggi.</p>
+                        <div class="mt-auto space-y-2">
+                             <button onclick="openDetailModal('kemiri')" class="w-full bg-emerald-500 text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-emerald-600 transition-colors">
+                                Lihat Detail
+                            </button>
+                            <a href="https://wa.me/6281242830127" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center px-4 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 transition-colors">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99 0-3.903-.52-5.586-1.456l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.267.655 4.398 1.803 6.12l-1.34 4.893 4.91-1.305z"/></svg>
+                                WhatsApp
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <!-- UMKM Card -->
@@ -342,34 +367,49 @@
                     <img src="gula aren.webp" alt="Gula Aren" class="w-full h-56 object-cover cursor-pointer image-gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Gula+Aren';">
                     <div class="p-6 flex-grow flex flex-col">
                         <h3 class="text-2xl font-bold mb-2 text-gray-900">Gula Aren</h3>
-                        <p class="text-gray-700 mb-4 flex-grow">Diolah secara tradisional oleh tangan-tangan terampil, menghasilkan rasa manis yang jujur dan alami dari alam.</p>
-                        <a href="https://wa.me/6281242830127" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex items-center justify-center px-4 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 transition-colors">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99 0-3.903-.52-5.586-1.456l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.267.655 4.398 1.803 6.12l-1.34 4.893 4.91-1.305z"/></svg>
-                            WhatsApp
-                        </a>
+                        <p class="text-gray-700 mb-4 flex-grow">Diolah secara tradisional, menghasilkan rasa manis yang jujur dan alami dari alam.</p>
+                         <div class="mt-auto space-y-2">
+                             <button onclick="openDetailModal('gula-aren')" class="w-full bg-emerald-500 text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-emerald-600 transition-colors">
+                                Lihat Detail
+                            </button>
+                            <a href="https://wa.me/6281242830127" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center px-4 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 transition-colors">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99 0-3.903-.52-5.586-1.456l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.267.655 4.398 1.803 6.12l-1.34 4.893 4.91-1.305z"/></svg>
+                                WhatsApp
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <!-- UMKM Card -->
                 <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMA0aSEyqKR6LOsCtWGw78Q8VmEoBz3JOGyw&s" alt="Udang Sungai" class="w-full h-56 object-cover cursor-pointer image-gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Udang';">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMA0aSEyqKR6LOsCtWGw78Q8VmEoBz3JOGyw&s" alt="Cengkeh" class="w-full h-56 object-cover cursor-pointer image-gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Cengkeh';">
                     <div class="p-6 flex-grow flex flex-col">
                         <h3 class="text-2xl font-bold mb-2 text-gray-900">Cengkeh</h3> 
-                        <p class="text-gray-700 mb-4 flex-grow">Aroma cengkeh dari Paminggalan, harum hingga hati membawa cerita dari tanah yang sederhana. Cengkeh terbaik tak perlu dicari jauh, cukup dari Desa Paminggalan wangi, murni, dan penuh cinta.</p>
-                        <a href="https://wa.me/6281242830127" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex items-center justify-center px-4 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 transition-colors">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99 0-3.903-.52-5.586-1.456l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.267.655 4.398 1.803 6.12l-1.34 4.893 4.91-1.305z"/></svg>
-                            WhatsApp
-                        </a>
+                        <p class="text-gray-700 mb-4 flex-grow">Aroma cengkeh dari Paminggalan, harum hingga hati membawa cerita dari tanah yang sederhana.</p>
+                         <div class="mt-auto space-y-2">
+                             <button onclick="openDetailModal('cengkeh')" class="w-full bg-emerald-500 text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-emerald-600 transition-colors">
+                                Lihat Detail
+                            </button>
+                            <a href="https://wa.me/6281242830127" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center px-4 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 transition-colors">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99 0-3.903-.52-5.586-1.456l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.267.655 4.398 1.803 6.12l-1.34 4.893 4.91-1.305z"/></svg>
+                                WhatsApp
+                            </a>
+                        </div>
                     </div>
                 </div>
                 <div class="bg-white/90 backdrop-blur-sm rounded-lg shadow-lg overflow-hidden group transform hover:-translate-y-2 transition-transform duration-300 flex flex-col">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVptxHFhHRXdmGZR-CHIzfQMHrHsXwenqBOA&s" alt="Udang Sungai" class="w-full h-56 object-cover cursor-pointer image-gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Udang';">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVptxHFhHRXdmGZR-CHIzfQMHrHsXwenqBOA&s" alt="Golla Kambu" class="w-full h-56 object-cover cursor-pointer image-gallery-item" onerror="this.onerror=null;this.src='https://placehold.co/400x300/e2e8f0/475569?text=Golla+Kambu';">
                     <div class="p-6 flex-grow flex flex-col">
                         <h3 class="text-2xl font-bold mb-2 text-gray-900">Golla kambu</h3> 
-                        <p class="text-gray-700 mb-4 flex-grow">Golla Kambu adalah salah satu kuliner khas Desa Paminggalan yang dibuat dari campuran kelapa parut dan gula merah, lalu dibentuk bulat dan padat. Dibuat dengan tangan-tangan penuh ketelatenan, Golla Kambu bukan sekadar makanan, tapi bagian dari identitas dan warisan budaya.</p>
-                        <a href="https://wa.me/6281242830127" target="_blank" rel="noopener noreferrer" class="mt-auto inline-flex items-center justify-center px-4 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 transition-colors">
-                            <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99 0-3.903-.52-5.586-1.456l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.267.655 4.398 1.803 6.12l-1.34 4.893 4.91-1.305z"/></svg>
-                            WhatsApp
-                        </a>
+                        <p class="text-gray-700 mb-4 flex-grow">Golla Kambu adalah salah satu kuliner khas Desa Paminggalan yang dibuat dari campuran kelapa parut dan gula merah.</p>
+                         <div class="mt-auto space-y-2">
+                             <button onclick="openDetailModal('golla-kambu')" class="w-full bg-emerald-500 text-white font-semibold px-4 py-2 rounded-lg shadow-md hover:bg-emerald-600 transition-colors">
+                                Lihat Detail
+                            </button>
+                            <a href="https://wa.me/6281242830127" target="_blank" rel="noopener noreferrer" class="w-full inline-flex items-center justify-center px-4 py-2 bg-green-500 text-white font-semibold rounded-lg shadow-md hover:bg-green-600 transition-colors">
+                                <svg class="w-5 h-5 mr-2" fill="currentColor" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.894 11.892-1.99 0-3.903-.52-5.586-1.456l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.886-.001 2.267.655 4.398 1.803 6.12l-1.34 4.893 4.91-1.305z"/></svg>
+                                WhatsApp
+                            </a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -477,7 +517,10 @@
             <div class="bg-white/90 backdrop-blur-sm p-4 sm:p-6 rounded-lg shadow-lg max-w-7xl mx-auto">
                 <h2 class="text-4xl font-bold text-gray-900 mb-2 text-center">e-Booklet Desa Paminggalan</h2>
                 <p class="text-center text-gray-600 mb-6 max-w-3xl mx-auto">
-                    Silakan lihat e-Booklet kami untuk informasi lebih lengkap mengenai pesona Desa Paminggalan.
+                    Silakan lihat e-Booklet kami untuk informasi lebih lengkap mengenai pesona Desa Paminggalan. 
+                    <a href="https://kompadansamandar.blogspot.com/search/label/Wisata%20Majene?&max-results=7" target="_blank" rel="noopener noreferrer" class="text-emerald-600 hover:underline font-medium">
+                        Jelajahi juga wisata lainnya di Majene
+                    </a>.
                 </p>
                 <div class="h-[80vh] bg-gray-200 flex justify-center items-center rounded-lg shadow-inner">
                     <embed src="eBOOKLET.pdf" width="100%" height="100%" type="application/pdf" class="rounded-lg">
@@ -501,12 +544,25 @@
     </main>
 
     <!-- Image Modal Structure -->
-    <div id="image-modal" class="image-modal-backdrop">
-        <button class="image-modal-close" id="close-image-modal">&times;</button>
-        <div class="image-modal-content">
-            <img src="" alt="Gambar Diperbesar" id="modal-image">
+    <div id="image-modal" class="modal-backdrop">
+        <button class="modal-close" id="close-image-modal">&times;</button>
+        <div class="modal-content max-w-4xl w-full">
+            <img src="" alt="Gambar Diperbesar" id="modal-image" class="w-auto h-auto max-w-full max-h-[90vh] object-contain rounded-lg shadow-lg">
         </div>
     </div>
+
+    <!-- Detail Modal Structure -->
+    <div id="detail-modal" class="modal-backdrop">
+        <div class="modal-content bg-white/95 backdrop-blur-sm rounded-lg shadow-xl max-w-3xl w-full mx-4 my-8 overflow-y-auto max-h-[90vh] relative">
+            <button class="modal-close text-gray-800 top-2 right-2" id="close-detail-modal">&times;</button>
+            <img src="" alt="Detail Gambar" id="detail-modal-image" class="w-full h-64 object-cover rounded-t-lg">
+            <div class="p-6 md:p-8">
+                <h3 id="detail-modal-title" class="text-3xl font-bold text-gray-900 mb-4"></h3>
+                <div id="detail-modal-description" class="text-gray-700 space-y-4 leading-relaxed text-justify"></div>
+            </div>
+        </div>
+    </div>
+
 
     <!-- Footer -->
     <footer class="bg-gray-800 text-white mt-12">
@@ -545,6 +601,65 @@
         document.addEventListener('DOMContentLoaded', () => {
             // --- Feather Icons Initialization ---
             feather.replace();
+
+            // --- Blog Data ---
+            const blogData = {
+                'air-terjun': {
+                    title: 'Air Terjun Palappang',
+                    image: 'air terjun.webp',
+                    description: `<p>Air Terjun Palappang adalah permata tersembunyi di Desa Paminggalan. Dikelilingi oleh vegetasi yang rimbun dan bebatuan alami, air terjun ini menawarkan suasana yang sejuk dan menenangkan.</p><p>Airnya yang jernih dan segar mengalir deras, menciptakan kolam alami di bawahnya yang sempurna untuk berenang atau sekadar merendam kaki. Perjalanan menuju air terjun ini sendiri merupakan sebuah petualangan, melewati jalan setapak yang dikelilingi keindahan alam liar. Tempat ini sangat ideal bagi para pencari ketenangan dan pecinta fotografi alam.</p>`
+                },
+                'sungai': {
+                    title: 'Sungai Paminggalan',
+                    image: 'sungai dkt d.webp',
+                    description: `<p>Sungai Paminggalan adalah urat nadi kehidupan desa. Alirannya yang jernih berkelok-kelok melintasi desa, menjadi sumber air bagi warga sekaligus tempat bermain anak-anak.</p><p>Di beberapa titik, sungai ini melebar dan melambat, menciptakan area yang ideal untuk bersantai di tepiannya. Bebatuan besar yang tersebar di sepanjang sungai menjadi tempat duduk alami untuk menikmati pemandangan. Suara gemericik air yang konstan menjadi musik latar yang menenangkan, menjadikannya tempat yang sempurna untuk melepaskan penat.</p>`
+                },
+                'gunung-pukkotta': {
+                    title: 'Gunung Pukkotta',
+                    image: 'gunung.webp',
+                    description: `<p>Gunung Pukkotta berdiri megah sebagai penjaga Desa Paminggalan. Bagi masyarakat setempat, gunung ini bukan hanya bentang alam, tetapi juga saksi bisu sejarah dan legenda yang diwariskan turun-temurun.</p><p>Mendaki Gunung Pukkotta adalah pengalaman spiritual dan fisik yang menantang sekaligus memuaskan. Dari puncaknya, pengunjung akan disuguhi pemandangan 360 derajat yang menakjubkan, meliputi lembah hijau, perbukitan, dan pemukiman desa di kejauhan. Momen matahari terbit atau terbenam dari puncak ini adalah pemandangan magis yang tak akan terlupakan.</p>`
+                },
+                 'hutan-desa': {
+                    title: 'Hutan Desa',
+                    image: 'hutan.webp',
+                    description: `<p>Hutan Desa Paminggalan adalah paru-paru hijau yang menjaga kelestarian ekosistem lokal. Hutan ini adalah rumah bagi beragam flora dan fauna, beberapa di antaranya merupakan spesies endemik.</p><p>Menjelajahi hutan ini seperti memasuki dunia lain yang penuh dengan suara alam—kicauan burung, seruan serangga, dan desau angin di antara pepohonan. Sinar matahari yang menembus kanopi lebat menciptakan permainan cahaya yang indah di lantai hutan. Ini adalah tempat yang ideal untuk trekking ringan, belajar tentang keanekaragaman hayati, dan menyatu kembali dengan alam.</p>`
+                },
+                'keindahan-alam': {
+                    title: 'Keindahan Alam Paminggalan',
+                    image: 'alam.webp',
+                    description: `<p>Keindahan alam di Desa Paminggalan adalah sebuah simfoni yang harmonis. Dari perbukitan hijau yang subur hingga lembah yang damai, setiap sudut desa menawarkan pemandangan yang memanjakan mata.</p><p>Setiap suara ranting yang patah, desir angin di dedaunan, dan kicauan burung yang merdu adalah bagian dari irama alam yang menyambut setiap tamu dengan ketulusan. Udara yang bersih dan segar, jauh dari polusi kota, memberikan energi baru bagi jiwa dan raga.</p>`
+                },
+                'gunung-ratte': {
+                    title: 'Gunung Ratte Toraya',
+                    image: 'gtatte.webp',
+                    description: `<p>Di puncak Gunung Tatte, langit terasa lebih dekat, dan hati pun lebih tenang. Gunung Tatte bukan sekadar tempat tinggi, tapi tempat di mana hati menemukan kedamaian sejati.</p><p>Pemandangan dari puncaknya membentang luas, memperlihatkan keagungan alam Sulawesi Barat. Ini adalah tempat yang sempurna untuk refleksi diri, meditasi, atau sekadar mengagumi ciptaan Tuhan dalam keheningan.</p>`
+                },
+                'padi-gunung': {
+                    title: 'Padi Gunung',
+                    image: 'pdh.webp',
+                    description: `<p>Bertani di gunung bukan hanya soal hasil panen semata, tetapi tentang menjaga warisan leluhur dan mencintai bumi. Sawah terasering yang menghiasi lereng-lereng bukit adalah bukti kerja keras dan kearifan lokal.</p><p>Tak peduli curamnya lereng dan dinginnya angin pegunungan, padi gunung tetap setia memberi kehidupan bagi masyarakat Desa Paminggalan. Proses menanam hingga panen masih dilakukan dengan cara-cara tradisional yang ramah lingkungan.</p>`
+                },
+                'kemiri': {
+                    title: 'Kemiri Lokal Paminggalan',
+                    image: 'kemirih.webp',
+                    description: `<p>Kemiri dari Desa Paminggalan dikenal memiliki kualitas premium. Dipanen dari pohon-pohon yang tumbuh subur di tanah perbukitan yang kaya mineral, biji kemiri ini memiliki kandungan minyak yang tinggi dan aroma yang kuat.</p><p>Proses pengolahannya masih dilakukan secara tradisional, mulai dari penjemuran di bawah sinar matahari hingga pemecahan cangkang yang dilakukan dengan tangan. Hal ini memastikan kualitasnya tetap terjaga. Kemiri Paminggalan tidak hanya menjadi bumbu penyedap masakan, tetapi juga dipercaya memiliki berbagai khasiat untuk kesehatan dan kecantikan rambut.</p>`
+                },
+                'gula-aren': {
+                    title: 'Gula Aren Tradisional',
+                    image: 'gula aren.webp',
+                    description: `<p>Gula aren Paminggalan adalah pemanis alami yang dibuat dengan penuh cinta. Nira aren disadap langsung dari pohonnya oleh para petani lokal yang telah mewarisi keahlian ini selama beberapa generasi.</p><p>Proses memasaknya dilakukan di atas tungku kayu bakar, diaduk perlahan hingga mengental dan mengkristal. Proses tradisional ini menghasilkan gula aren dengan warna cokelat keemasan, aroma karamel yang khas, dan rasa manis yang legit dengan sedikit sentuhan 'smoky'. Gula ini sangat cocok untuk pemanis kopi, teh, atau sebagai bahan utama dalam pembuatan kue dan hidangan tradisional.</p>`
+                },
+                'cengkeh': {
+                    title: 'Cengkeh Kualitas Terbaik',
+                    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSMA0aSEyqKR6LOsCtWGw78Q8VmEoBz3JOGyw&s',
+                    description: `<p>Aroma cengkeh dari Paminggalan, harum hingga ke hati, membawa cerita dari tanah yang sederhana dan subur. Cengkeh terbaik tak perlu dicari jauh, cukup dari Desa Paminggalan—wangi, murni, dan penuh cinta.</p><p>Dipetik saat kuncupnya mekar sempurna dan dikeringkan di bawah matahari pegunungan, cengkeh kami memiliki kualitas aroma dan rasa yang superior, cocok untuk bumbu masakan, minuman herbal, hingga keperluan aromaterapi.</p>`
+                },
+                'golla-kambu': {
+                    title: 'Golla Kambu Khas Paminggalan',
+                    image: 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRVptxHFhHRXdmGZR-CHIzfQMHrHsXwenqBOA&s',
+                    description: `<p>Golla Kambu adalah salah satu kuliner khas Desa Paminggalan yang dibuat dari campuran kelapa parut pilihan dan gula merah asli, lalu dibentuk bulat dan padat. Dibuat dengan tangan-tangan penuh ketelatenan, Golla Kambu bukan sekadar makanan, tapi bagian dari identitas dan warisan budaya.</p><p>Rasanya yang manis dan gurih, dengan tekstur yang khas, menjadikannya camilan yang sempurna untuk menemani waktu santai Anda. Setiap gigitan Golla Kambu adalah cita rasa otentik dari Paminggalan.</p>`
+                }
+            };
 
             // --- Swiper Initialization ---
             const swiper = new Swiper('.main-carousel', {
@@ -592,27 +707,48 @@
             mobileMenuButton.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
             window.closeMobileMenu = () => mobileMenu.classList.add('hidden');
 
-            // --- Image Modal Logic ---
+            // --- Modal Logic (Image & Detail) ---
             const imageModal = document.getElementById('image-modal');
             const modalImage = document.getElementById('modal-image');
             const closeImageModalButton = document.getElementById('close-image-modal');
             
-            function openModal(src) {
+            const detailModal = document.getElementById('detail-modal');
+            const detailModalImage = document.getElementById('detail-modal-image');
+            const detailModalTitle = document.getElementById('detail-modal-title');
+            const detailModalDescription = document.getElementById('detail-modal-description');
+            const closeDetailModalButton = document.getElementById('close-detail-modal');
+
+            function openImageModal(src) {
                 modalImage.src = src;
                 imageModal.classList.add('show');
             }
+            
+            window.openDetailModal = function(itemId) {
+                const data = blogData[itemId];
+                if(data) {
+                    detailModalImage.src = data.image;
+                    detailModalTitle.textContent = data.title;
+                    detailModalDescription.innerHTML = data.description;
+                    detailModal.classList.add('show');
+                }
+            }
 
-            function closeModal() {
-                imageModal.classList.remove('show');
+            function closeModal(modal) {
+                modal.classList.remove('show');
             }
 
             document.querySelectorAll('.image-gallery-item').forEach(item => {
-                item.addEventListener('click', () => openModal(item.src));
+                item.addEventListener('click', () => openImageModal(item.src));
             });
 
-            closeImageModalButton.addEventListener('click', closeModal);
+            closeImageModalButton.addEventListener('click', () => closeModal(imageModal));
             imageModal.addEventListener('click', (event) => {
-                if (event.target === imageModal) closeModal();
+                if (event.target === imageModal) closeModal(imageModal);
+            });
+            
+            closeDetailModalButton.addEventListener('click', () => closeModal(detailModal));
+            detailModal.addEventListener('click', (event) => {
+                if (event.target === detailModal) closeModal(detailModal);
             });
             
             // --- News Feed Logic ---
@@ -620,7 +756,6 @@
                 const newsContainer = document.getElementById('news-container');
                 const rssUrls = [
                     'https://kompadansamandar.blogspot.com/feeds/posts/default',
-                    // 'https://mandarnews.com/feed/' // Removed due to consistent errors
                 ];
                 const apiUrl = 'https://api.rss2json.com/v1/api.json?rss_url=';
 
